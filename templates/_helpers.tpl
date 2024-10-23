@@ -53,7 +53,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "my-chart.serviceAccountName" -}}
+{{- define "lab.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
 {{- default (include "my-chart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
