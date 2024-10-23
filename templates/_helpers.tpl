@@ -34,11 +34,13 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "lab.labels" -}}
-app: {{ .Values.app.name }}
-chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-release: "{{ .Release.Name }}"
-heritage: "{{ .Release.Service }}"
-{{- end -}}
+helm.sh/chart: {{ include "my-chart.chart" . }}
+{{ include "my-chart.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 
 {{/*
 Selector labels
