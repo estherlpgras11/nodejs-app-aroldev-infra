@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.deployment.name }}-dp
   labels:
-    {{- include "lab.labels" . | nindent 4 }}
+    {{- include "my-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.deployment.replicaCount }}
@@ -37,16 +37,16 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- with .Values.deployment.livenessProbe }}
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.deployment.livenessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.deployment.readinessProbe }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.deployment.readinessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           resources:
-            {{- toYaml .Values.deployment.resources | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

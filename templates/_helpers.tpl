@@ -33,7 +33,7 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "lab.labels" -}}
+{{- define "my-chart.labels" -}}
 helm.sh/chart: {{ include "my-chart.chart" . }}
 {{ include "my-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
